@@ -343,7 +343,10 @@ def real_len(u, alt=False):
 
 def yt_datetime(yt_date_time):
     """ Return a time object, locale formated date string and locale formatted time string. """
-    time_obj = time.strptime(yt_date_time, "%Y-%m-%dT%H:%M:%SZ")
+    try:
+        time_obj = time.strptime(yt_date_time, "%Y-%m-%dT%H:%M:%S.%fZ")
+    except:
+        time_obj = time.strptime(yt_date_time, "%Y-%m-%dT%H:%M:%SZ")
     locale_date = time.strftime("%x", time_obj)
     locale_time = time.strftime("%X", time_obj)
     # strip first two digits of four digit year
